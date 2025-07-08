@@ -1,0 +1,53 @@
+Assignment 2.
+
+1a. Identify the film title with the highest number of rentals and (1b) how many times it has been rented. 
+
+1a) 
+SELECT film_id, count(*) AS rental_count
+FROM rental r
+GROUP BY film_id
+
+(1b)
+SELECT title, count(*)
+FROM rental r
+HAVING rental_count>count(*)
+
+2. List the top five cities that have the highest number of customers. 
+
+CREATE VIEW active_customers AS 
+SELECT * FROM customers 
+WHERE status = ‘active_cities’;
+LIMIT 5;
+
+3. Write a query to find customers who exist in the customer table but have no record in the payment table. 
+
+SELECT first_name, last_name
+FROM customers 
+SELECT customer_id, sum(amount) AS total paid
+FROM payment 
+WHERE status = ‘NULL’;
+
+4. Calculate the total revenue each store has generated based on payments handled by its staff. 
+
+SELECT staff_id, sum(amount) AS total_revenue
+FROM payment 
+GROUP BY staff_id
+
+5. Display each customer with their average payment amount. 
+
+SELECT DISTINCT c.first_name, c.last_name
+FROM payment P;
+
+6. Display the names of customers who lived in Canada.
+
+SELECT + FROM customers 
+WHERE city = ‘Canada’
+
+7. Find the five longest films. 
+
+SELECT title, length
+FROM film
+ORDER BY length ASCE
+LIMIT 5;
+
+
